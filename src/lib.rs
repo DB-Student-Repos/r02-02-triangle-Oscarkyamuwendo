@@ -1,19 +1,26 @@
-pub struct Triangle;
+pub struct Triangle(u64, u64, u64);
 
 impl Triangle {
     pub fn build(sides: [u64; 3]) -> Option<Triangle> {
-        unimplemented!("Construct new Triangle from following sides: {sides:?}. Return None if the sides are invalid.");
+        let [a, b, c] = sides;
+        if a + b > c && a + c > b && b + c > a && a > 0 && b > 0 && c > 0 {
+            Some(Triangle(a, b, c))
+        } else {
+            None
+        }
     }
-
     pub fn is_equilateral(&self) -> bool {
-        unimplemented!("Determine if the Triangle is equilateral.");
+        let &Triangle(a, b, c) = self;
+        a == b && b == c
     }
 
     pub fn is_scalene(&self) -> bool {
-        unimplemented!("Determine if the Triangle is scalene.");
+        let &Triangle(a, b, c) = self;
+        a != b && b != c && a != c
     }
 
     pub fn is_isosceles(&self) -> bool {
-        unimplemented!("Determine if the Triangle is isosceles.");
+        let &Triangle(a, b, c) = self;
+        a == b || b == c || a == c
     }
 }
